@@ -12,7 +12,7 @@ pub fn scale(
 ) -> Result<Option<types::Context>, Box<dyn std::error::Error>> {
     if let Some(mut ctx) = ctx {
         let model = Model::new(128);
-        ctx.digit = model.predict(&ctx.pixels).unwrap();
+        ctx.digit = model.predict(&ctx.pixels);
         return signature::next(Some(ctx));
     }
     signature::next(ctx)
@@ -46,7 +46,7 @@ impl Model {
     }
 
     /// Predict accepts a pre-flattened 28x28 grid of pixels and returns the predicted digit.
-    fn predict(&self, pixels: &[u32]) -> Option<u32> {
+    fn predict(&self, pixels: &[u32]) -> u32 {
         let pixel_count = 28 * 28; // 784
         let digits_count = 10; // 0-9
 
@@ -90,6 +90,7 @@ impl Model {
             .unwrap()
             .first()
             .cloned()
+            .unwrap()
     }
 }
 
@@ -113,9 +114,11 @@ fn test_model() {
 
     let model = Model::new(128);
 
-    for i in 0..10 {
-        let example: Vec<u32> = serde_json::from_slice(examples[i].as_slice()).unwrap();
-        assert_eq!(i as u32, model.predict(&example).unwrap());
+    // Iterate over each example, parsing the JSON bytes into a vector of u32s
+    // and then predicting the digit using that example.
+    examples.iter().enumerate().for_each(|(i, e)| {
+        let example: Vec<u32> = serde_json::from_slice(e.as_slice()).unwrap();
+        assert_eq!(i as u32, model.predict(&example));
         println!("Successfully classified the digit {}", i);
-    }
+    });
 }
