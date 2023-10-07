@@ -61,14 +61,21 @@ impl Model {
 
         // Create our first hidden layer where the dimensions are the number of total
         // pixels 28x28= 784 and the hidden layer dimension which we set to 128.
-        let dense_weight = self.vb.get((self.hidden_dim, pixel_count), "d1_w").unwrap();
+        let dense_weight = self
+            .vb
+            .get((pixel_count, self.hidden_dim), "d1_w")
+            .unwrap()
+            .transpose(0, 1)
+            .unwrap();
         let dense_bias = self.vb.get(self.hidden_dim, "d1_b").unwrap();
         let dense = Linear::new(dense_weight, Some(dense_bias));
 
         // Create our output layer which is a dense layer with 128 inputs and 10 outputs
         let output_weight = self
             .vb
-            .get((digits_count, self.hidden_dim), "d2_w")
+            .get((self.hidden_dim, digits_count), "d2_w")
+            .unwrap()
+            .transpose(0, 1)
             .unwrap();
         let output_bias = self.vb.get(digits_count, "d2_b").unwrap();
         let output = Linear::new(output_weight, Some(output_bias));
@@ -109,5 +116,6 @@ fn test_model() {
     for i in 0..10 {
         let example: Vec<u32> = serde_json::from_slice(examples[i].as_slice()).unwrap();
         assert_eq!(i as u32, model.predict(&example).unwrap());
+        println!("Successfully classified the digit {}", i);
     }
 }

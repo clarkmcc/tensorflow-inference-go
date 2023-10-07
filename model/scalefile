@@ -9,7 +9,7 @@ signature {
   tag          = "latest"
 }
 
-stateless   = false
+stateless   = true
 function    = "scale"
 initialize  = ""
 description = ""
