@@ -1,0 +1,21 @@
+
+[package]
+name = "model"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+path = "lib.rs"
+
+[dependencies]
+safetensors = "0.4.0"
+candle-nn = "0.3.0"
+candle-core = "0.3.0"
+getrandom = { version = "0.2", features = ["js"] }
+signature = { package = "local_bindings_latest_guest", path = "../signature/guest" }
+serde_json = "1.0.107"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1

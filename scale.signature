@@ -1,0 +1,10 @@
+version = "v1alpha"
+context = "context"
+model Context {
+  uint32_array Pixels {
+    initial_size = 728
+  }
+  uint32 Digit {
+    default = 0
+  }
+}

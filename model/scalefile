@@ -1,0 +1,15 @@
+version  = "v1alpha"
+name     = "model"
+tag      = "latest"
+language = "rust"
+
+signature {
+  organization = "local"
+  name         = "bindings"
+  tag          = "latest"
+}
+
+stateless   = false
+function    = "scale"
+initialize  = ""
+description = ""
