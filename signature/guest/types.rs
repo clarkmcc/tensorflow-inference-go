@@ -41,7 +41,7 @@ impl Context {
     pub fn new() -> Self {
         Self {
             digit: 0,
-            pixels: Vec::with_capacity(728),
+            pixels: Vec::with_capacity(784),
         }
     }
 }

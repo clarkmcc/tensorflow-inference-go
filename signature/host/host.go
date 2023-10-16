@@ -8,7 +8,7 @@ import (
 	interfaces "github.com/loopholelabs/scale-signature-interfaces"
 )
 
-const hash = "3520c1a009b852d19f3bfd36535a8a62a0256bfb1c804c8cbda5455e47855a37"
+const hash = "86026d7c55f2c1ca3d712c6ac564b06a76695c40c1eae1b3d46000ad13177961"
 
 var _ interfaces.Signature = (*Signature)(nil)
 

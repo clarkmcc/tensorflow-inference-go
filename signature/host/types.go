@@ -24,7 +24,7 @@ func NewContext() *Context {
 
 		Digit: 0,
 
-		Pixels: make([]uint32, 0, 728),
+		Pixels: make([]uint32, 0, 784),
 	}
 }
 

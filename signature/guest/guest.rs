@@ -5,7 +5,7 @@ pub mod types;
 use crate::types::{Encode, Decode};
 use std::io::Cursor;
 use polyglot_rs::Encoder;
-static HASH: &'static str = "3520c1a009b852d19f3bfd36535a8a62a0256bfb1c804c8cbda5455e47855a37";
+static HASH: &'static str = "86026d7c55f2c1ca3d712c6ac564b06a76695c40c1eae1b3d46000ad13177961";
 static mut READ_BUFFER: Vec<u8> = Vec::new();
 static mut WRITE_BUFFER: Vec<u8> = Vec::new();
 pub unsafe fn write(ctx: Option<&mut types::Context>) -> (u32, u32) {
